@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
@@ -48,26 +48,6 @@ function CheckoutForm({ amount }: { amount: number }) {
       router.push("/success");
       return;
     }
-
-    // const card = elements.getElement(CardElement);
-    // if (!card) {
-    //   toast.error("❌ Card not found");
-    //   return;
-    // }
-
-    // const result = await stripe.confirmCardPayment(clientSecret, {
-    //   payment_method: {
-    //     card,
-    //   },
-    // });
-
-    // if (result.error) {
-    //   toast.error(`❌ ${result.error.message}`);
-    // } else if (result.paymentIntent?.status === 'succeeded')
-     {
-      toast.success("✅ Payment successful!");
-      router.push("/success");
-    }
   };
 
   return (
@@ -75,7 +55,6 @@ function CheckoutForm({ amount }: { amount: number }) {
       <CardElement className="border p-3 rounded bg-white" />
       <button
         type="button"
-        // disabled={!stripe || !clientSecret}
         className="w-full bg-blue-900 text-white py-2 rounded hover:bg-blue-700"
         onClick={handleSubmit}
       >
@@ -84,8 +63,9 @@ function CheckoutForm({ amount }: { amount: number }) {
     </form>
   );
 }
+
 // ⚡ Main Page
-export default function PaymentPage() {
+function PaymentContent() {
   const searchParams = useSearchParams();
   const car = searchParams.get('car') ? JSON.parse(searchParams.get('car')!) : null;
   const fare = parseFloat(searchParams.get('fare') || '0');
@@ -104,5 +84,13 @@ export default function PaymentPage() {
         <CheckoutForm amount={fare} />
       </Elements>
     </div>
+  );
+}
+
+export default function PaymentPage() {
+  return (
+    <Suspense>
+      <PaymentContent />
+    </Suspense>
   );
 }
