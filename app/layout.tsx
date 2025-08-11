@@ -5,7 +5,7 @@ import "./globals.css";
 import NavBar from "./components/NavBar";
 import ClientWrapper from "./context/ClientWrapper";
 import { Toaster } from "sonner"; 
-
+import NavbarWrapper from "./components/NavbarWrapper";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -31,8 +31,9 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${inter.variable} ${roboto.variable} antialiased`}>
           <ClientWrapper>
-            <NavBar />
-            {children}
+          <NavbarWrapper />
+              {children}
+              
             <Toaster position="top-center" richColors />
           </ClientWrapper>
         </body>

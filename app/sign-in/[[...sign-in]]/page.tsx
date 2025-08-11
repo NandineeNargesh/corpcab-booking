@@ -3,11 +3,9 @@ import { SignIn } from "@clerk/nextjs";
 
 export default function SignInPage() {
   return (
-    <SignIn
-      path="/sign-in"
-      routing="path"
-      signUpUrl="/sign-up"
-      afterSignInUrl="/company-dashboard" // Go to dashboard after login
-    />
+
+    <div className="min-h-screen flex items-center justify-center">
+          <SignIn  afterSignInUrl="/company-dashboard" />
+        </div>
   );
 }

@@ -27,7 +27,7 @@ function CheckoutForm({ amount }: { amount: number }) {
         const data = await res.json();
         if (data.clientSecret) {
           setClientSecret(data.clientSecret);
-          // toast.success("✅ Payment initialized");
+          toast.success("✅ Payment initialized");
         } else {
           toast.error("❌ clientSecret not returned");
         }
@@ -43,10 +43,13 @@ function CheckoutForm({ amount }: { amount: number }) {
     e.preventDefault();
     console.log("🔔 Button clicked");
 
-    if (stripe && elements && clientSecret) {
-      toast.success("✅ Payment successful");
-      router.push("/success");
-      return;
+    if (amount > 0) {
+      toast.success("✅ Payment successful!");
+      setTimeout(() => {
+        router.push("/success");
+      }, 2000); // Redirect after 2 seconds
+    } else {
+      toast.error("❌ Invalid amount");
     }
   };
 
@@ -54,9 +57,8 @@ function CheckoutForm({ amount }: { amount: number }) {
     <form onSubmit={handleSubmit} className="space-y-4">
       <CardElement className="border p-3 rounded bg-white" />
       <button
-        type="button"
+        type="submit" // Changed to 'submit' to trigger the form
         className="w-full bg-blue-900 text-white py-2 rounded hover:bg-blue-700"
-        onClick={handleSubmit}
       >
         Pay ₹{amount}
       </button>
