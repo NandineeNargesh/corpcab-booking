@@ -1,3 +1,6 @@
+// app/company-dashboard/page.tsx
+
+//  Do NOT add "use client" here
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -6,7 +9,6 @@ import CompanyTabs from "./components/CompanyTabs";
 export default async function CompanyDashboard() {
   const { userId } = await auth();
 
-  // If not logged in, send to sign-in page
   if (!userId) {
     redirect("/sign-in");
   }
