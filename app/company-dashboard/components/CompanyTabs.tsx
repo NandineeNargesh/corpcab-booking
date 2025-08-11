@@ -19,12 +19,12 @@ export default function CompanyTabs() {
   const tab = searchParams.get("tab") || "bookings";
 
   const handleTabChange = (value: string) => {
-    // Replaces the history entry instead of adding a new one (faster experience)
+    // Replace the history entry instead of adding a new one
     router.replace(`${pathname}?tab=${value}`);
   };
 
   return (
-    <Tabs value={tab} onValueChange={handleTabChange} className="  w-full">
+    <Tabs value={tab} onValueChange={handleTabChange} className="w-full">
       <TabsList className="mb-4 flex flex-wrap gap-2">
         <TabsTrigger value="bookings">Bookings</TabsTrigger>
         <TabsTrigger value="new">New Booking</TabsTrigger>
