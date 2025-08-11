@@ -49,21 +49,7 @@ function CheckoutForm({ amount }: { amount: number }) {
       return;
     }
 
-    // const card = elements.getElement(CardElement);
-    // if (!card) {
-    //   toast.error("❌ Card not found");
-    //   return;
-    // }
-
-    // const result = await stripe.confirmCardPayment(clientSecret, {
-    //   payment_method: {
-    //     card,
-    //   },
-    // });
-
-    // if (result.error) {
-    //   toast.error(`❌ ${result.error.message}`);
-    // } else if (result.paymentIntent?.status === 'succeeded')
+   
      {
       toast.success("✅ Payment successful!");
       router.push("/success");
@@ -75,7 +61,7 @@ function CheckoutForm({ amount }: { amount: number }) {
       <CardElement className="border p-3 rounded bg-white" />
       <button
         type="button"
-        // disabled={!stripe || !clientSecret}
+       
         className="w-full bg-blue-900 text-white py-2 rounded hover:bg-blue-700"
         onClick={handleSubmit}
       >
